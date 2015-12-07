@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../jquery-tmpl/jquery.tmpl.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+        function getQueryArgs() {
+            var qs = location.search.length > 0 ? location.search.substring(1) : "";
+            var args = {};
+            var items = qs.length ? qs.split("&") : [];
+            var item = null;
+            var name = null;
+            var value = null;
+            for (var i = 0; i < items.length; i++) {
+                item = items[i].split("=");
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                if (name.length) {
+                    args[name] = value;
+                }
+            }
+            return args;
+        }
+        $(function () {
+            $("#btn").click(function () {
+                var html = "";
+                var obj = getQueryArgs();
+                for (var arg in obj) {
+                    html += "<h2>参数 " + arg + "=" + obj[arg] + "</h2>"
+                }
+                $("body").append(html);
+            })
+        })
+
+    </script>
+
+
+</head>
+<body>
+<a href="index.html?fishPlanId=YYh1512119">初始化url 链接 test1.html?fishPlanId=YYh1512119</a><br>
+<a href="index.html?fishPlanId=YYh1512119&lyh=2b&autor=刘永辉">初始化url 链接
+    test1.html?fishPlanId=YYh1512119&lyh=2b&autor=刘永辉</a><br>
+<a href="index.html?kk=YYh1512119&aaa=sbb&abc=111">初始化url 链接 test1.html?kk=YYh1512119&aaa=sbb&abc=111</a><br>
+
+<button id="btn">点击查看</button>
+
+
+</body>
+</html>
